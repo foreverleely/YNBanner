@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //
+- (void)offsetLogic;
+
 - (void)addTimer;
 
 - (void)nextImage;
