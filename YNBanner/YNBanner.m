@@ -28,7 +28,7 @@
         self.numberOfPages = viewList.count - 2;
         self.timeInterval = timeInterval;
         [self setupContentWithView];
-        [self addTimer];
+//        [self addTimer];
         
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPageHandle)]];
     }
@@ -39,7 +39,7 @@
     NSInteger count = self.viewList.count;
     for (int i = 0; i < count; i++) {
         UIView *view = self.viewList[i];
-        CGRect rect = CGRectMake(i * CGRectGetWdith(self), 0, CGRectGetWdith(self), CGRectGetHeight(self));
+        CGRect rect = CGRectMake(i * CGRectGetWidth(self.frame), 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
         view.frame = rect;
         [self.scrollView addSubview:view];
     }
@@ -47,8 +47,8 @@
 }
 
 - (void)setupScrollView:(NSInteger)count {
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWdith(self) * count, 0);
-    self.scrollView.contentOffset = CGPointMake(CGRectGetWdith(self), 0);
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * count, 0);
+    self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.frame), 0);
 }
 
 - (void)addTimer {
@@ -58,7 +58,7 @@
 
 - (void)nextImage {
     NSInteger page = self.pageControl.currentPage + 2;
-    [self.scrollView setContentOffset:CGPointMake(page * CGRectGetWdith(self), 0) animated:true];
+    [self.scrollView setContentOffset:CGPointMake(page * CGRectGetWidth(self.frame), 0) animated:true];
 }
 
 - (void)removeTimer {
@@ -68,10 +68,10 @@
 
 - (void)offsetLogic {
     if (self.pageControl.currentPage == 0) {
-        self.scrollView.contentOffset = CGPointMake(CGRectGetWdith(self), 0);
+        self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.frame), 0);
     }
     if (self.pageControl.currentPage == self.numberOfPages - 1) {
-        self.scrollView.contentOffset = CGPointMake(CGRectGetWdith(self) * self.numberOfPages, 0);
+        self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.frame) * self.numberOfPages, 0);
     }
 }
 
@@ -84,7 +84,7 @@
 #pragma mark - UIScrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    int page = (scrollView.contentOffset.x + CGRectGetWdith(self) * 0.5) / CGRectGetWdith(self);
+    int page = (scrollView.contentOffset.x + CGRectGetWidth(self.frame) * 0.5) / CGRectGetWidth(self.frame);
     if (page == self.numberOfPages + 1) {
         self.pageControl.currentPage = 0;
     }else if (page == 0) {
@@ -104,9 +104,9 @@
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    int page = (scrollView.contentOffset.x + CGRectGetWdith(self) * 0.5) / CGRectGetWdith(self);
+    int page = (scrollView.contentOffset.x + CGRectGetWidth(self.frame) * 0.5) / CGRectGetWidth(self.frame);
     if (page == self.numberOfPages + 1) {
-        self.scrollView.contentOffset = CGPointMake(CGRectGetWdith(self), 0);
+        self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.frame), 0);
     }
 }
 
@@ -120,7 +120,7 @@
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWdith(self), CGRectGetHeight(self))];
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = false;
         _scrollView.delegate = self;
@@ -132,7 +132,7 @@
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
         CGFloat width = 15 * self.numberOfPages;
-        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(CGRectGetWdith(self) / 2 - width / 2, CGRectGetHeight(self.scrollView.frame) - 20, CGRectGetWdith(self), 20)];
+        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.frame) / 2 - width / 2, CGRectGetHeight(self.scrollView.frame) - 20, CGRectGetWidth(self.frame), 20)];
         _pageControl.numberOfPages = self.numberOfPages;
         [self addSubview:_pageControl];
     }

@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YNBanner : UIView
 
-// 在原数组的基础上，加上数组最后一个作为第一个，加上数组第一个作为最后一个，然后组成新的数组
 - (instancetype)initViewWithFrame:(CGRect)frame ViewList:(NSArray *)viewList timeInterval:(CGFloat)timeInterval;
 
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -20,6 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^yn_updatePageIndex)(NSInteger index);
 
 @property (nonatomic, copy) void (^yn_clickPage)(NSInteger index);
+
+
+//
+- (void)addTimer;
+
+- (void)nextImage;
+
+- (void)removeTimer;
 
 @end
 
