@@ -10,7 +10,7 @@
 
 @interface YNBanner ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
+//@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) NSInteger numberOfPages;
 @property (nonatomic, assign) BOOL beginDrag;

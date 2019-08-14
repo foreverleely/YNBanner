@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initViewWithFrame:(CGRect)frame ViewList:(NSArray *)viewList timeInterval:(CGFloat)timeInterval;
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIPageControl *pageControl;
 
 @property (nonatomic, copy) void (^yn_updatePageIndex)(NSInteger index);
